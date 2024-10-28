@@ -146,8 +146,6 @@ if __name__ == '__main__':
 
     print('Args in experiment:')
     print_args(args)
-    import pdb
-    pdb.set_trace()
 
     if args.task_name == 'long_term_forecast':
         Exp = Exp_Long_Term_Forecast

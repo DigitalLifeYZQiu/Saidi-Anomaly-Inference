@@ -98,15 +98,7 @@ def list_to_input_tensor(input_list):
         input = torch.Tensor(input).to(exp.device)
     return input
 
-def output_tensor_to_list(output_tensor):
-    if output_tensor.device.type == 'cuda':
-        output = output_tensor.detach().to('cpu')
-    else:
-        output = output_tensor
-    # * Not using inverse transform on dataset level
-    # if inference_data.scale and exp.args.inverse:
-    #     shape = output.shape
-    #     inference_data.inverse_transform(outputs.reshape(shape[0] * shape[1], -1)).reshape(shape)
+def output_tensor_to_list(output):
     if len(output.shape)==3:
         output = output.reshape(output.shape[1],output.shape[2])
     return output.tolist()

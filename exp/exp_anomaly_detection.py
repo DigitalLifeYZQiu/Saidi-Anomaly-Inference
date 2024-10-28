@@ -218,9 +218,10 @@ class Exp_Anomaly_Detection(Exp_Basic):
         sample = sample.float().to(self.device)
         outputs = self.model(sample[:, :self.args.seq_len, :], None, None, None)
         score = torch.mean(self.anomaly_criterion(sample, outputs), dim=-1)
+        threshold = 0.25
+        score = score.detach().cpu().numpy()
+        pred = (score > threshold).astype(int)
 
-        # import pdb
-        # pdb.set_trace()
 
         # return outputs
-        return score
+        return pred
